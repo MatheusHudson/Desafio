@@ -5,6 +5,8 @@ class Curso(
         var codigo: Int,
         var titular: Titular,
         var adjunto: Adjunto,
+        var qtdMaximaAlunos: Int,
+        var listaAlunosMatriculado: MutableList<Aluno>
 ) {
 
     override fun equals(other: Any?): Boolean {
