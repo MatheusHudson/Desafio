@@ -7,6 +7,13 @@ class Curso(
         var adjunto: Adjunto,
 ) {
 
+    init {
+        println(" O professor titular do curso de $nome é : ${titular.nome} e o adjunto é: ${adjunto.nome}")
+    }
+
+
+
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
