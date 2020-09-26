@@ -1,19 +1,17 @@
 package br.desafioCurso.com
 
 class Curso(
-        var nome: String,
-        var codigo: Int,
-        var titular: Titular,
-        var adjunto: Adjunto,
-        var qtdMaximaAlunos: Int,
-        var listaAlunosMatriculado: MutableList<Aluno>
+        private var nome: String,
+        private var codigo: Int,
+        private var titular: Titular,
+        private var adjunto: Adjunto,
+        private var qtdMaximaAlunos: Int,
+        private var listaAlunosMatriculado: MutableList<Aluno>,
 ) {
 
     init {
         println(" O professor titular do curso de $nome é : ${titular.nome} e o adjunto é: ${adjunto.nome}")
     }
-
-
 
 
     override fun equals(other: Any?): Boolean {
@@ -27,5 +25,27 @@ class Curso(
         return true
     }
 
+    fun adicionarUmAluno(aluno: Aluno): Boolean {
+        when  {
+            listaAlunosMatriculado.size < qtdMaximaAlunos -> {
+                println("Aluno matriculado com sucesso!")
+                qtdMaximaAlunos++
+                listaAlunosMatriculado.add(aluno)
+                return true
+            }
+            else -> {
+                println("Não há vagas disponiveis para este curso!")
+                return false
+            }
+
+        }
+    }
+
+fun excluiUmAluno(aluno: Aluno) {
+    listaAlunosMatriculado.remove(aluno); println("Aluno removido do curso de: $nome!")
+}
+
 
 }
+
+
