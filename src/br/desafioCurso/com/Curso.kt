@@ -1,6 +1,11 @@
 package br.desafioCurso.com
 
-class Curso(var nome: String, var codigo: Int)  {
+class Curso(
+        var nome: String,
+        var codigo: Int,
+        var titular: Titular,
+        var adjunto: Adjunto,
+) {
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
