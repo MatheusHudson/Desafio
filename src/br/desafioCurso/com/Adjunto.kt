@@ -7,6 +7,13 @@ class Adjunto(override var nome: String,
 
 ) : Professor {
     private var qtdHorasMonitoria: Int? = null
+    override fun toString(): String {
+        return "Adjunto(nome='$nome', sobrenome='$sobrenome', codigo=$codigo, tempoDeCasa=$tempoDeCasa, qtdHorasMonitoria=$qtdHorasMonitoria)"
+    }
+
+
 }
+
+
 
 

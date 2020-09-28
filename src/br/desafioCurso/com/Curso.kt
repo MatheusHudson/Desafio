@@ -6,8 +6,10 @@ package br.desafioCurso.com
         private var qtdMaximaAlunos: Int,
 
         ) {
+      val titular = mutableMapOf<Int, Titular>()
+      val adjunto = mutableMapOf<Int, Adjunto>()
 
-      val listaAlunosMatriculado = mutableListOf<Aluno>()
+      val listaAlunosMatriculado = mutableMapOf<Int, Aluno>()
 
 
 
@@ -22,12 +24,12 @@ package br.desafioCurso.com
         return true
     }
 
-    fun adicionarUmAluno(aluno: Aluno): Boolean {
+    fun adicionarUmAluno(codigo: Int,aluno: Aluno): Boolean {
         when  {
             listaAlunosMatriculado.size < qtdMaximaAlunos -> {
                 println("Aluno matriculado com sucesso!")
                 qtdMaximaAlunos++
-                listaAlunosMatriculado.add(aluno)
+                listaAlunosMatriculado.put(codigo,aluno)
                 return true
             }
             else -> {

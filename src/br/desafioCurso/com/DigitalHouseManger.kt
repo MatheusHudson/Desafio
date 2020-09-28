@@ -1,22 +1,22 @@
 package br.desafioCurso.com
 
 class DigitalHouseManger() {
-    val listaAlunos = mutableListOf<Aluno>()
-    val listaProfessores = mutableListOf<Professor>()
-    val listaCursos = mutableListOf<Curso>()
+    val listaAlunos = mutableMapOf<Int, Aluno>()
+    val listaProfessores = mutableMapOf<Int, Professor>()
+    val listaCursos = mutableMapOf<Int, Curso>()
     val listaMatriculas = mutableListOf<Matricula>()
 
 
     fun registrarCurso(nome: String, codigoCurso: Int, qtdMaximaAluno: Int) {
         val curso = Curso(nome, codigoCurso, qtdMaximaAluno)
-        listaCursos.add(curso)
+        listaCursos.put(codigoCurso, curso)
         println("Curso registrado com sucesso!")
     }
 
     fun excluirCurso(codigoCurso: Int) {
         when {
-            listaCursos.contains(codigoCurso) -> {
-                listaCursos.remove(listaCursos[codigoCurso])
+            listaCursos.containsKey(codigoCurso) -> {
+                listaCursos.remove(codigoCurso)
                 println("Curso removido!")
             }
             else -> println("Não é possivel excluir este curso, pois ele não existe!")
@@ -32,7 +32,7 @@ class DigitalHouseManger() {
     ) {
 
         var professorAdjunto = Adjunto(nome, sobrenome, codigoProfessor, quantidadeDeHoras)
-        listaProfessores.add(professorAdjunto)
+        listaProfessores.put(codigoProfessor, professorAdjunto)
         println("Professor Adjunto adicionado!")
 
     }
@@ -46,14 +46,15 @@ class DigitalHouseManger() {
     ) {
 
         var professorTitular = Titular(nome, sobrenome, codigoProfessor, quantidadeDeHoras, especialidade)
-        listaProfessores.add(professorTitular)
+        listaProfessores.put(codigoProfessor, professorTitular)
         println("Professor Titular adicionado!")
     }
 
     fun excluirProfessor(codigoProfessor: Int) {
-        val lista = listaProfessores.filter { it.codigo === codigoProfessor }
+
         when {
-            lista.isNotEmpty() -> {
+            listaProfessores.containsKey(codigoProfessor) -> {
+                listaProfessores.remove(codigoProfessor)
                 println("Professor removido com sucesso! ")
             }
             else -> println("Não é possivel excluir este curso, pois ele não existe!")
@@ -63,22 +64,22 @@ class DigitalHouseManger() {
 
     fun matricularAluno(nome: String, sobrenome: String, codigoAluno: Int) {
         val aluno = Aluno(nome, sobrenome, codigoAluno)
-        listaAlunos.add(aluno)
+        listaAlunos.put(codigoAluno, aluno)
         println("Aluno adicionado!!")
     }
 
     fun matricularAluno(codigoAluno: Int, codigoCurso: Int) {
-        val filtrarAluno = listaAlunos.filter { it.codigo === codigoAluno }
-        val filtrarCurso = listaCursos.filter { it.codigo === codigoCurso }
+
 
         when {
-           filtrarAluno.isNotEmpty() && filtrarCurso.isNotEmpty() -> {
-                val aluno = filtrarAluno
-                val curso = listaCursos[codigoCurso]
-               aluno.forEach { curso.adicionarUmAluno(it) }
-               aluno.forEach { curso.listaAlunosMatriculado.add(it)}
+            listaAlunos.containsKey(codigoAluno) && listaCursos.containsKey(codigoCurso) -> {
 
-                val matricula = Matricula(aluno[0], curso)
+                val aluno = listaAlunos[codigoAluno]
+                val curso = listaCursos[codigoCurso]
+
+                curso!!.adicionarUmAluno(codigoAluno, aluno!!)
+                curso.listaAlunosMatriculado.put(codigoAluno, aluno)
+               val matricula = Matricula(aluno, curso)
                 listaMatriculas.add(matricula)
 
             }
@@ -91,23 +92,19 @@ class DigitalHouseManger() {
             codigoProfessorTitular: Int,
             codigoProfessorAdjunto: Int,
     ) {
-        val filtrarCurso = listaCursos.filter { it.codigo === codigoCurso }
-        val filtrarProfessorTitular = listaProfessores.filter { it.codigo === codigoProfessorTitular }
-        val filtrarProfessorAdjunto = listaProfessores.filter { it.codigo === codigoProfessorAdjunto }
+
+
         when {
-            filtrarCurso.isNotEmpty() && filtrarProfessorTitular.isNotEmpty() -> {
-                listaProfessores.addAll(filtrarProfessorTitular)
+            listaCursos.containsKey(codigoCurso) && listaProfessores.containsKey(codigoProfessorTitular) -> {
+                listaCursos[codigoCurso]!!.titular.put(codigoProfessorTitular, listaProfessores[codigoProfessorTitular] as Titular)
                 println("Professor alocado com sucesso!")
             }
-            filtrarCurso.isNotEmpty() && filtrarProfessorAdjunto.isNotEmpty() -> {
-                listaProfessores.addAll(filtrarProfessorAdjunto)
+            listaCursos.containsKey(codigoCurso) && listaProfessores.containsKey(codigoProfessorAdjunto) -> {
+                listaCursos[codigoCurso]!!.adjunto.put(codigoProfessorAdjunto, listaProfessores[codigoProfessorAdjunto] as Adjunto)
                 println("Professor alocado com sucesso!")
             }
             else -> println("Não é possivel alocar estes professores!")
-
-
         }
-
     }
 
 
