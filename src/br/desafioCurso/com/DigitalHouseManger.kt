@@ -77,10 +77,13 @@ class DigitalHouseManger() {
                 val aluno = listaAlunos[codigoAluno]
                 val curso = listaCursos[codigoCurso]
 
-                curso!!.adicionarUmAluno(codigoAluno, aluno!!)
+                var check = curso!!.adicionarUmAluno(codigoAluno, aluno!!)
                 curso.listaAlunosMatriculado.put(codigoAluno, aluno)
-               val matricula = Matricula(aluno, curso)
-                listaMatriculas.add(matricula)
+                if (check) {
+                    val matricula = Matricula(aluno, curso)
+                    listaMatriculas.add(matricula)
+
+                }
 
             }
             else -> println("Informe um codigo de Aluno e codigo de curso existente!")

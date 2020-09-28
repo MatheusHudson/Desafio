@@ -28,7 +28,6 @@ package br.desafioCurso.com
         when  {
             listaAlunosMatriculado.size < qtdMaximaAlunos -> {
                 println("Aluno matriculado com sucesso!")
-                qtdMaximaAlunos++
                 listaAlunosMatriculado.put(codigo,aluno)
                 return true
             }
