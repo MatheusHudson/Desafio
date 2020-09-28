@@ -1,17 +1,14 @@
 package br.desafioCurso.com
 
-class Curso(
+ class Curso(
         private var nome: String,
-        private var codigo: Int,
-        private var titular: Titular,
-        private var adjunto: Adjunto,
+        var codigo: Int ,
         private var qtdMaximaAlunos: Int,
-        private var listaAlunosMatriculado: MutableList<Aluno>,
-) {
 
-    init {
-        println(" O professor titular do curso de $nome é : ${titular.nome} e o adjunto é: ${adjunto.nome}")
-    }
+        ) {
+
+      val listaAlunosMatriculado = mutableListOf<Aluno>()
+
 
 
     override fun equals(other: Any?): Boolean {
@@ -42,10 +39,14 @@ class Curso(
     }
 
 fun excluiUmAluno(aluno: Aluno) {
-    listaAlunosMatriculado.remove(aluno); println("Aluno removido do curso de: $nome!")
+    listaAlunosMatriculado.remove(aluno)
+    println("Aluno removido do curso de: $nome!")
 }
 
+     override fun toString(): String {
+         return "Curso(nome='$nome', codigo=$codigo, qtdMaximaAlunos=$qtdMaximaAlunos)"
+     }
 
-}
 
+ }
 
