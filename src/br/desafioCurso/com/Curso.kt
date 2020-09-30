@@ -1,17 +1,16 @@
 package br.desafioCurso.com
 
-class Curso(
+ class Curso(
         private var nome: String,
-        private var codigo: Int,
-        private var titular: Titular,
-        private var adjunto: Adjunto,
+        var codigo: Int ,
         private var qtdMaximaAlunos: Int,
-        private var listaAlunosMatriculado: MutableList<Aluno>,
-) {
 
-    init {
-        println(" O professor titular do curso de $nome é : ${titular.nome} e o adjunto é: ${adjunto.nome}")
-    }
+        ) {
+      val titular = mutableMapOf<Int, Titular>()
+      val adjunto = mutableMapOf<Int, Adjunto>()
+
+      val listaAlunosMatriculado = mutableMapOf<Int, Aluno>()
+
 
 
     override fun equals(other: Any?): Boolean {
@@ -25,12 +24,11 @@ class Curso(
         return true
     }
 
-    fun adicionarUmAluno(aluno: Aluno): Boolean {
+    fun adicionarUmAluno(codigo: Int,aluno: Aluno): Boolean {
         when  {
             listaAlunosMatriculado.size < qtdMaximaAlunos -> {
                 println("Aluno matriculado com sucesso!")
-                qtdMaximaAlunos++
-                listaAlunosMatriculado.add(aluno)
+                listaAlunosMatriculado.put(codigo,aluno)
                 return true
             }
             else -> {
@@ -42,10 +40,14 @@ class Curso(
     }
 
 fun excluiUmAluno(aluno: Aluno) {
-    listaAlunosMatriculado.remove(aluno); println("Aluno removido do curso de: $nome!")
+    listaAlunosMatriculado.remove(aluno)
+    println("Aluno removido do curso de: $nome!")
 }
 
+     override fun toString(): String {
+         return "Curso(nome='$nome', codigo=$codigo, qtdMaximaAlunos=$qtdMaximaAlunos)"
+     }
 
-}
 
+ }
 
