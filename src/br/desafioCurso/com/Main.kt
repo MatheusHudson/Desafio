@@ -34,6 +34,4 @@ fun main() {
     digitalHouseManger.matricularAluno(997,2002)
 
 
-
-
 }

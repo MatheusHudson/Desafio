@@ -78,8 +78,9 @@ class DigitalHouseManger() {
                 val curso = listaCursos[codigoCurso]
 
                 var check = curso!!.adicionarUmAluno(codigoAluno, aluno!!)
-                curso.listaAlunosMatriculado.put(codigoAluno, aluno)
+
                 if (check) {
+                    curso.listaAlunosMatriculado.put(codigoAluno, aluno)
                     val matricula = Matricula(aluno, curso)
                     listaMatriculas.add(matricula)
 
@@ -98,11 +99,12 @@ class DigitalHouseManger() {
 
 
         when {
-            listaCursos.containsKey(codigoCurso) && listaProfessores.containsKey(codigoProfessorTitular) -> {
+            listaCursos.containsKey(codigoCurso) && listaProfessores.containsKey(codigoProfessorTitular) &&
+                    listaCursos.containsKey(codigoCurso) && listaProfessores.containsKey(codigoProfessorAdjunto) -> {
+
                 listaCursos[codigoCurso]!!.titular.put(codigoProfessorTitular, listaProfessores[codigoProfessorTitular] as Titular)
                 println("Professor alocado com sucesso!")
-            }
-            listaCursos.containsKey(codigoCurso) && listaProfessores.containsKey(codigoProfessorAdjunto) -> {
+
                 listaCursos[codigoCurso]!!.adjunto.put(codigoProfessorAdjunto, listaProfessores[codigoProfessorAdjunto] as Adjunto)
                 println("Professor alocado com sucesso!")
             }

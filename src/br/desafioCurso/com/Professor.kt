@@ -7,7 +7,6 @@ interface Professor {
     var tempoDeCasa: Int
 
 
-
      fun equals(other: Professor): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
