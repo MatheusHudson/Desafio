@@ -1,5 +1,7 @@
 package br.desafioCurso.com
 
+import java.lang.Exception
+
 class DigitalHouseManger() {
     val listaAlunos = mutableMapOf<Int, Aluno>()
     val listaProfessores = mutableMapOf<Int, Professor>()
@@ -79,7 +81,10 @@ class DigitalHouseManger() {
 
                 var check = curso!!.adicionarUmAluno(codigoAluno, aluno!!)
 
-                if (check) {
+                if (check && !aluno.cursosMartriculados.contains(curso)) {
+
+                    aluno.cursosMartriculados.add(curso)
+
                     curso.listaAlunosMatriculado.put(codigoAluno, aluno)
                     val matricula = Matricula(aluno, curso)
                     listaMatriculas.add(matricula)
@@ -112,5 +117,15 @@ class DigitalHouseManger() {
         }
     }
 
+
+    fun verificarCursosMatriculados(aluno: Aluno?) {
+        try {
+            println("${aluno?.nome} está matriculado nos cursos de:")
+            aluno!!.cursosMartriculados.forEach { println(it.nome) }
+        } catch(ex : Exception) {
+            println("Escolha um aluno valido")
+        }
+
+    }
 
 }
