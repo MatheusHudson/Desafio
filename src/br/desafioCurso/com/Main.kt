@@ -27,11 +27,14 @@ fun main() {
 
 
     digitalHouseManger.matricularAluno(999,2001)
+    digitalHouseManger.matricularAluno(999,2001)
     digitalHouseManger.matricularAluno(998,2001)
 
     digitalHouseManger.matricularAluno(999,2002)
     digitalHouseManger.matricularAluno(998,2002)
     digitalHouseManger.matricularAluno(997,2002)
+
+    digitalHouseManger.verificarCursosMatriculados(digitalHouseManger.listaAlunos[999])
 
 
 }

@@ -1,7 +1,7 @@
 package br.desafioCurso.com
 
  class Curso(
-        private var nome: String,
+         var nome: String,
         var codigo: Int ,
         private var qtdMaximaAlunos: Int,
 
